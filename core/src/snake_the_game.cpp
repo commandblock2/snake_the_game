@@ -40,17 +40,18 @@ const std::list<point>& snake_the_game::game::get_snake_body() const
 	return body;
 }
 
+
 const std::vector<point>& snake_the_game::game::get_food() const
 {
 	std::lock_guard guard(rwlock);
 	return food;
 }
 
-const snake_the_game::direction& snake_the_game::game::get_direction() const
-{
-	std::lock_guard guard(rwlock);
-	return direction;
-}
+//const snake_the_game::direction& snake_the_game::game::get_direction() const
+//{
+//	std::lock_guard guard(rwlock);
+//	return direction;
+//}
 
 void snake_the_game::game::on_key_down(snake_the_game::direction & d)
 {

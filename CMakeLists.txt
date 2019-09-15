@@ -17,6 +17,8 @@ set(headers ${PROJECT_SOURCE_DIR}/core/include)
 
 
 if(SFML_snake)
+	message("SFML snake")
+	add_subdirectory(./SFML)
 endif()
 
 if(OPENGL_snake)

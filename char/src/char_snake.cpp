@@ -9,7 +9,7 @@ char_snake::char_snake::char_snake(const int width, const int height,
 	const std::chrono::milliseconds fast_interval)
 {
 	game(width, height, length_strech_per_food, regular_interval, fast_interval);
-
+	//explicitly call the base class constructor
 }
 
 void char_snake::char_snake::exec()

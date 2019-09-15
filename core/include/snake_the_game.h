@@ -59,7 +59,7 @@ namespace snake_the_game
 		void exec();
 		const std::list<point>& get_snake_body() const;
 		const std::vector<point>& get_food() const;
-		const snake_the_game::direction& get_direction() const;
+		//const snake_the_game::direction& get_direction() const;
 
 		void on_key_down(snake_the_game::direction& d);
 		void on_key_up();
