@@ -1,5 +1,8 @@
 #include "SFML_snake.h"
 #include <SFML/Graphics.hpp>
+#include <algorithm>
+#include <thread>
+#include <utility>
 
 SFML_snake::SFML_snake::SFML_snake(const int width, const int height,
 	const int length_strech_per_food,
@@ -15,22 +18,32 @@ SFML_snake::SFML_snake::SFML_snake(const int width, const int height,
 void SFML_snake::SFML_snake::exec()
 {
 	sf::RenderWindow window(sf::VideoMode(window_width, window_height), "snake the game(SFML)");
-
+    
+    std::thread([this](){snake_the_game::game::exec();}).detach();
 
 	while ((!game_over()) && window.isOpen())
 	{
-		sf::RenderTexture render_texture;
-
-		render_texture.create(window_width, window_height);
-
 		const auto& snake_body = get_snake_body();
 		const auto& food = get_food();
 
-		for (auto i = snake_body.begin(); i != snake_body.end(); ++i)
+		for (auto i = std::next(snake_body.end(),-1); 
+             i != std::next(snake_body.begin()); --i)
 		{
-			const auto [x, y] = cauculate_lefttop_position(*i);
+			const auto block_begin = cauculate_lefttop_position(*i);
+            
+            const auto [square_begin_x,square_begin_y] = 
+            std::tuple{block_begin.first + piexels_per_block / 10 * 2
+                ,block_begin.second + piexels_per_block / 10 * 2};
+                
+            const int square_length = piexels_per_block / 10 * 6;
+            
+            sf::RectangleShape rect(sf::Vector2f(square_length,square_length));
+            rect.setPosition(square_begin_x,square_begin_y);
+            rect.setFillColor(sf::Color::Red);
+            
+            window.draw(rect);
+            
 		}
-
 
 		window.display();
 	}

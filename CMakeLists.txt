@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.14)
 
-if(MSVC)
-	add_compile_options("/std:c++17")
-else()
-	set(CMAKE_CXX_STANDARD_REQUIRED 17)
-endif()
+#if(MSVC)
+#	add_compile_options("/std:c++17")
+#else()
+	set(CMAKE_CXX_STANDARD 17)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+    set(CMAKE_CXX_EXTENSIONS OFF)
+#endif()
 
 option(SFML_snake "build SFML snake" off)
 option(OPENGL_snake "build OPENGL snake" off)

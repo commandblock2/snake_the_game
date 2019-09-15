@@ -45,8 +45,8 @@ namespace snake_the_game
 		int length_to_strech;
 
 		//atomic
-		std::atomic<direction> direction = direction::right;
-		std::atomic<bool> instant_tick = false;
+		std::atomic<direction> direction_{direction::right};
+		std::atomic<bool> instant_tick{false};
 		std::atomic<std::chrono::milliseconds> interval;
 
 	public:
@@ -57,8 +57,8 @@ namespace snake_the_game
 
 	protected:
 		void exec();
-		const std::list<point>& get_snake_body() const;
-		const std::vector<point>& get_food() const;
+		const std::list<point> get_snake_body() const;
+		const std::vector<point> get_food() const;
 		//const snake_the_game::direction& get_direction() const;
 
 		void on_key_down(snake_the_game::direction& d);

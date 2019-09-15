@@ -4,6 +4,7 @@
 
 #include <thread>
 #include <mutex>
+#include <algorithm>
 
 using point = snake_the_game::game::point;
 
@@ -34,14 +35,14 @@ void snake_the_game::game::exec()
 	gameover = true;
 }
 
-const std::list<point>& snake_the_game::game::get_snake_body() const
+const std::list<point> snake_the_game::game::get_snake_body() const
 {
 	std::lock_guard guard(rwlock);
 	return body;
 }
 
 
-const std::vector<point>& snake_the_game::game::get_food() const
+const std::vector<point> snake_the_game::game::get_food() const
 {
 	std::lock_guard guard(rwlock);
 	return food;
@@ -55,7 +56,7 @@ const std::vector<point>& snake_the_game::game::get_food() const
 
 void snake_the_game::game::on_key_down(snake_the_game::direction & d)
 {
-	direction = d;
+	direction_ = d;
 	interval = fast_interval;
 	instant_tick = true;
 }
@@ -68,7 +69,7 @@ void snake_the_game::game::on_key_up()
 const point snake_the_game::game::cauculate_next_pos()
 {
 	point head = body.front();
-	switch (direction)
+	switch (direction_)
 	{
 	case direction::up:
 		head.second--;

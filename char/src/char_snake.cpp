@@ -1,7 +1,7 @@
 #include "char_snake.h"
 #include <thread>
 
-#include <conio.h>
+//#include <conio.h>
 
 char_snake::char_snake::char_snake(const int width, const int height,
 	const int length_strech_per_food,
