@@ -19,10 +19,11 @@ void SFML_snake::SFML_snake::exec()
 {
 	sf::RenderWindow window(sf::VideoMode(window_width, window_height), "snake the game(SFML)");
     
-    std::thread([this](){snake_the_game::game::exec();}).detach();
+	std::thread([this](){snake_the_game::game::exec();}).detach();
 
 	while ((!game_over()) && window.isOpen())
 	{
+		window.clear();
 		const auto& snake_body = get_snake_body();
 		const auto& food = get_food();
 
@@ -31,18 +32,41 @@ void SFML_snake::SFML_snake::exec()
 		{
 			const auto block_begin = cauculate_lefttop_position(*i);
             
-            const auto [square_begin_x,square_begin_y] = 
-            std::tuple{block_begin.first + piexels_per_block / 10 * 2
-                ,block_begin.second + piexels_per_block / 10 * 2};
+			const auto [square_begin_x,square_begin_y] = 
+				std::tuple{block_begin.first + piexels_per_block / 10 * 2
+				,block_begin.second + piexels_per_block / 10 * 2};
                 
-            const int square_length = piexels_per_block / 10 * 6;
+			const int square_length = piexels_per_block / 10 * 6;
             
-            sf::RectangleShape rect(sf::Vector2f(square_length,square_length));
-            rect.setPosition(square_begin_x,square_begin_y);
-            rect.setFillColor(sf::Color::Red);
+			sf::RectangleShape rect(sf::Vector2f(square_length,square_length));
+			rect.setPosition(square_begin_x,square_begin_y);
+			rect.setFillColor(sf::Color::Red);
             
-            window.draw(rect);
+			window.draw(rect);
+			
+			//draw the connection
             
+		}
+		
+		sf::Event event;
+		while(window.pollEvent(event))
+		{
+			if(event.type == sf::Event::KeyBoardPressed)
+				switch(event.key.code)
+				{
+					case sf::Keyboard::W:
+						break;
+					case sf::Keyboard::W:
+						break;
+					case sf::Keyboard::W:
+						break;
+					case sf::Keyboard::W:
+						break;
+					default:
+						break;
+				}
+			else if (event.type == sf::Event::KeyboardReleased)
+				on_key_up();
 		}
 
 		window.display();
