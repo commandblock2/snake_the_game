@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <thread>
+#include <tuple>
 #include <utility>
 
 SFML_snake::SFML_snake::SFML_snake(const int width, const int height,
@@ -51,21 +52,25 @@ void SFML_snake::SFML_snake::exec()
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
-			if(event.type == sf::Event::KeyBoardPressed)
+			if(event.type == sf::Event::KeyPressed)
 				switch(event.key.code)
 				{
 					case sf::Keyboard::W:
+						on_key_down(snake_the_game::direction::up);
 						break;
-					case sf::Keyboard::W:
+					case sf::Keyboard::S:
+						on_key_down(snake_the_game::direction::down);
 						break;
-					case sf::Keyboard::W:
+					case sf::Keyboard::A:
+						on_key_down(snake_the_game::direction::left);
 						break;
-					case sf::Keyboard::W:
+					case sf::Keyboard::D:
+						on_key_down(snake_the_game::direction::right);
 						break;
 					default:
 						break;
 				}
-			else if (event.type == sf::Event::KeyboardReleased)
+			else if (event.type == sf::Event::KeyReleased)
 				on_key_up();
 		}
 

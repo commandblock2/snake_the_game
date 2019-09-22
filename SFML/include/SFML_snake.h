@@ -8,7 +8,7 @@ namespace SFML_snake
 
 	class SFML_snake : public snake_the_game::game
 	{
-		static constexpr int piexels_per_block = 10;
+		static constexpr int piexels_per_block = 40;
 		static constexpr int border_width_block = 1;
 		const int window_width,window_height;
 

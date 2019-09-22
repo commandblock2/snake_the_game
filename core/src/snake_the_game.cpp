@@ -54,7 +54,7 @@ const std::vector<point> snake_the_game::game::get_food() const
 //	return direction;
 //}
 
-void snake_the_game::game::on_key_down(snake_the_game::direction & d)
+void snake_the_game::game::on_key_down(snake_the_game::direction d)
 {
 	direction_ = d;
 	interval = fast_interval;
